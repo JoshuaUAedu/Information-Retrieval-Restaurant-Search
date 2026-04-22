@@ -17,18 +17,19 @@ This project indexes ~974 open Arizona restaurants from Yelp, combining their na
 
 Create a new Virtual Environment for this Project 
 (Recommended Code - I used Anaconda)
-'''bash
+
+```bash
 conda create -n IRenv python = 3.11
 conda activate IRenv
-'''
+```
 
 ```bash
 pip install -r requirements.txt
 ```
 
-'''bash
+```bash
 python -m ipykernel install --user --name IRenv --display-name "Python (IRenv)"
-'''
+```
 
 ### 2. Download the Yelp Dataset
 
@@ -45,8 +46,11 @@ data/
 ### 3. Jupyter Notebook (.ipynb) Initialization
 
 Run the first 2 Sections of the .ipynb file
+
 -> 0 - Imports
+
 -> 1 - Data Extraction
+
 This will allow for you to have the .pkl data files necessary for the UI to run smoothly
 
 ### 4. Run the app
@@ -119,7 +123,7 @@ The notebook documents the full research progression:
 | **4 - Query Expansion** | Embedding-based vocabulary expansion using `SentenceTransformer` and WordNet synonym expansion (tested and compared) |
 | **5 - Semantic Search** | Dense retrieval using document embeddings and cosine similarity |
 | **6 - Hybrid Scoring** | Combining BM25 and semantic scores with a tunable alpha weight |
-| **7 - Relevance Labelling** | Manually grading results (0–4) across 9 test queries for all three methods |
+| **7 - Relevance Labelling** | Manually grading results (0–4) across 10 test queries for all three methods |
 | **8 - Evaluation** | NDCG@10 results — Hybrid: 0.961, Semantic: 0.9, BM25: 0.923 |
 | **9 - UI Testing** | Initial Streamlit prototype built and tested inside the notebook |
 
@@ -127,7 +131,7 @@ The notebook documents the full research progression:
 
 ## Results
 
-Evaluated on 9 natural language queries (food preferences, price constraints, dietary restrictions, occasion-based):
+Evaluated on 10 natural language queries (food preferences, price constraints, dietary restrictions, occasion-based):
 
 | Method | NDCG@10 |
 |---|---|
@@ -143,4 +147,4 @@ Evaluated on 9 natural language queries (food preferences, price constraints, di
 |---|---|
 | `data/arizona_restuarant_corpus.pkl` | Preprocessed document corpus (Series of strings) |
 | `data/az_dict.pkl` | Full business DataFrame with all metadata |
-| `data/qrels.json` | Human relevance labels for evaluation queries |
+| `data/qrels.json` | Relevance labels for evaluation queries |
