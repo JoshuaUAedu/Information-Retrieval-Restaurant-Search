@@ -54,7 +54,7 @@ if 'page' not in st.session_state:
 model_choice = st.radio(
     'Select Model:',
     ['BM25', 'Semantic', 'Hybrid (Best)'],
-    index=1,
+    index=2,
     horizontal=True,
 )
 query = st.text_input('Enter your query')

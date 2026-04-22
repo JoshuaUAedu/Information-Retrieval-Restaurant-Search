@@ -67,7 +67,7 @@ This opens the search UI in your browser. On first load it builds the index and 
 | **Semantic** | Dense vector search using `all-MiniLM-L6-v2` with query expansion |
 | **Hybrid** | Weighted combination of BM25 and Semantic scores (20% BM25 / 80% Semantic) |
 
-Semantic search is set as the default and achieved a high NDCG@10 score in evaluation and yielded best results when checking invdividually.
+Hybrid search is set as the default as it achieved the highest NDCG@10 score in evaluation and yielded best results when checking invdividually.
 
 ---
 
@@ -120,7 +120,7 @@ The notebook documents the full research progression:
 | **5 - Semantic Search** | Dense retrieval using document embeddings and cosine similarity |
 | **6 - Hybrid Scoring** | Combining BM25 and semantic scores with a tunable alpha weight |
 | **7 - Relevance Labelling** | Manually grading results (0–4) across 9 test queries for all three methods |
-| **8 - Evaluation** | NDCG@10 results — Hybrid: 0.948, Semantic: 0.945, BM25: 0.888 |
+| **8 - Evaluation** | NDCG@10 results — Hybrid: 0.961, Semantic: 0.9, BM25: 0.923 |
 | **9 - UI Testing** | Initial Streamlit prototype built and tested inside the notebook |
 
 ---
@@ -131,11 +131,9 @@ Evaluated on 9 natural language queries (food preferences, price constraints, di
 
 | Method | NDCG@10 |
 |---|---|
-| BM25 | 0.8876 |
-| Semantic | 0.9454 |
-| **Hybrid** | **0.9482** | 
-
--- though Semantic will be used as default as it seemed to outperform Hybrid in my opinion with less obvious errors
+| BM25 | 0.9232 |
+| Semantic | 0.8957 |
+| **Hybrid** | **0.9609** | 
 
 ---
 
