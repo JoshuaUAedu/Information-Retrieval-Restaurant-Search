@@ -5,14 +5,14 @@ from py.preprocessing import preprocessv2
 from py.query_expansion import query_expand
 
 
-def bm25_search(query, bm25, k=10):
+def bm25_search(query, bm25, k=20):
     tokens = preprocessv2(query)
     scores = bm25.get_scores(tokens)
     ranked = np.argsort(scores)[-k:][::-1]
     return list(set(ranked))
 
 
-def semantic_search(query, model_s, doc_embeds, embeddings, vocab, k=10):
+def semantic_search(query, model_s, doc_embeds, embeddings, vocab, k=20):
     q_tokens = preprocessv2(query)
     exp_tokens = query_expand(query, model_s, embeddings, vocab)
     extra_tokens = [x for x in exp_tokens if x not in q_tokens]
@@ -24,7 +24,7 @@ def semantic_search(query, model_s, doc_embeds, embeddings, vocab, k=10):
     return list(set(top_docs))
 
 
-def hybrid_search(query, bm25, model_s, doc_embeds, embeddings, vocab, alpha=0.2, k=10):
+def hybrid_search(query, bm25, model_s, doc_embeds, embeddings, vocab, alpha=0.2, k=20):
     q_tokens = preprocessv2(query)
     exp_tokens = query_expand(query, model_s, embeddings, vocab)
     extra_tokens = [x for x in exp_tokens if x not in q_tokens]

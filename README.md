@@ -8,15 +8,27 @@ A search engine for Arizona restaurants built using the Yelp Open Dataset. Suppo
 
 This project indexes ~974 open Arizona restaurants from Yelp, combining their name, categories, ratings, and up to 20 reviews into a single searchable document per restaurant. Users can query the system in natural language and receive ranked results.
 
+- Documents and Instructions of Usage will all be within this README.md
 ---
 
 ## How to Run
 
-### 1. Install dependencies
+### 1. New VEnv + Install dependencies
+
+Create a new Virtual Environment for this Project 
+(Recommended Code - I used Anaconda)
+'''bash
+conda create -n IRenv python = 3.11
+conda activate IRenv
+'''
 
 ```bash
 pip install -r requirements.txt
 ```
+
+'''bash
+python -m ipykernel install --user --name IRenv --display-name "Python (IRenv)"
+'''
 
 ### 2. Download the Yelp Dataset
 
@@ -30,7 +42,14 @@ data/
 
 > The `data/` folder is in `.gitignore` and is not tracked by git.
 
-### 3. Run the app
+### 3. Jupyter Notebook (.ipynb) Initialization
+
+Run the first 2 Sections of the .ipynb file
+-> 0 - Imports
+-> 1 - Data Extraction
+This will allow for you to have the .pkl data files necessary for the UI to run smoothly
+
+### 4. Run the app
 
 ```bash
 streamlit run app.py

@@ -19,14 +19,21 @@ def init():
 
 def format_results(doc_ids, docs_df):
     formatted = []
-    for rank, doc_id in enumerate(doc_ids, 1):
+    seen = set() #set for unique only
+    rank = 1
+    for doc_id in doc_ids:
         row = docs_df.iloc[doc_id]
+        title = row['name']
+        if title in seen: #prevent adding duplicate restaurants
+            continue
+        seen.add(title)
         formatted.append({
             'rank': rank,
-            'title': row['name'],
+            'title': title,
             'info': f'{row["categories"]} | Rating: {row["stars"]}',
             'doc_id': doc_id,
         })
+        rank += 1
     return formatted
 
 
@@ -46,7 +53,7 @@ if 'page' not in st.session_state:
 #CONTROLS
 model_choice = st.radio(
     'Select Model:',
-    ['BM25', 'Semantic ⭐ (Best)', 'Hybrid'],
+    ['BM25', 'Semantic', 'Hybrid (Best)'],
     index=1,
     horizontal=True,
 )
@@ -57,7 +64,7 @@ if st.button('Search'):
 
     if model_choice == 'BM25':
         raw = bm25_search(query, bm25)
-    elif model_choice == 'Semantic* (Best)':
+    elif model_choice == 'Semantic':
         raw = semantic_search(query, model_s, doc_embeds, vocab_embeds, vocab)
     else:
         raw = hybrid_search(query, bm25, model_s, doc_embeds, vocab_embeds, vocab)

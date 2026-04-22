@@ -7,13 +7,13 @@ from sentence_transformers import SentenceTransformer
 
 from py.preprocessing import preprocessv2
 
-
+# load data made from .ipynb files (section 1- Data Extraction)
 def load_data(corpus_path='data/arizona_restuarant_corpus.pkl', docs_path='data/az_dict.pkl'):
     documents = pd.read_pickle(corpus_path)
     docs = pd.read_pickle(docs_path)
     return documents, docs
 
-
+#inverted index creation + bm25
 def build_index(documents):
     tokens = [preprocessv2(doc) for doc in documents]
 
@@ -28,15 +28,15 @@ def build_index(documents):
     bm25 = BM25Okapi(tokens)
     return tokens, invert_index, idf, bm25
 
-
+# load the SentenceTransformer model
 def load_model(model_name='all-MiniLM-L6-v2'):
     return SentenceTransformer(model_name)
 
-
+#Embedding for doc
 def build_doc_embeddings(model_s, documents, show_progress=True):
     return model_s.encode(list(documents), show_progress_bar=show_progress)
 
-
+#Embeddings for vocab
 def build_vocab_embeddings(model_s, invert_index):
     vocab = list(invert_index.keys())
     embeddings = model_s.encode(vocab)
