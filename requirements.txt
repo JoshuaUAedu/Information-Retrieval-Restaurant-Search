@@ -7,3 +7,7 @@ ipykernel
 jupyter
 pandas
 nltk
+streamlit
+beautifulsoup4
+selenium
+webdriver-manager
